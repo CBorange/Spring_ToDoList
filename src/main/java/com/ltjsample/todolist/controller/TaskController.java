@@ -1,6 +1,6 @@
 package com.ltjsample.todolist.controller;
 
-import com.ltjsample.todolist.controller.dao.TaskAddInfo;
+import com.ltjsample.todolist.controller.dto.TaskAddInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;

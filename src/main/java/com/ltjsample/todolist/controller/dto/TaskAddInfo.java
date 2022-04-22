@@ -1,4 +1,4 @@
-package com.ltjsample.todolist.controller.dao;
+package com.ltjsample.todolist.controller.dto;
 
 public class TaskAddInfo {
     private String taskExplain;
