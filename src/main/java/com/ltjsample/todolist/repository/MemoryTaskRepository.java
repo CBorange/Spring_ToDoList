@@ -1,9 +1,11 @@
 package com.ltjsample.todolist.repository;
 
 import com.ltjsample.todolist.domain.Task;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryTaskRepository implements TaskRepository{
 
     private Map<Long, Task> store;

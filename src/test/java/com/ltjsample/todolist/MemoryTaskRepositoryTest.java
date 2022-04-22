@@ -33,4 +33,9 @@ public class MemoryTaskRepositoryTest {
             Assertions.assertThat(result).isEqualTo(task);
         }
     }
+
+    @Test
+    public void delete(){
+
+    }
 }
