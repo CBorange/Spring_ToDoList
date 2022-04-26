@@ -1,6 +1,7 @@
 package com.ltjsample.todolist.service;
 
 import com.ltjsample.todolist.controller.dto.TaskAddInfo;
+import com.ltjsample.todolist.controller.dto.TaskFinishInfo;
 import com.ltjsample.todolist.domain.Task;
 import com.ltjsample.todolist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class TaskService {
 
     }
 
-    public void FinishTask(){
-
+    public void finishTask(TaskFinishInfo finishInfo){
+        taskRepository.findById(finishInfo.getTaskID());
     }
 }

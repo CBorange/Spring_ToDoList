@@ -1,6 +1,7 @@
 package com.ltjsample.todolist.controller;
 
 import com.ltjsample.todolist.controller.dto.TaskAddInfo;
+import com.ltjsample.todolist.controller.dto.TaskFinishInfo;
 import com.ltjsample.todolist.domain.Task;
 import com.ltjsample.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class TaskController {
     @PostMapping("/add")
     public String add(@ModelAttribute TaskAddInfo taskAddInfo){
         taskService.addTask(taskAddInfo);
+        return "redirect:/";
+    }
+
+    @PostMapping("/finish")
+    public String finish(@ModelAttribute TaskFinishInfo taskFinishInfo){
+        taskService.finishTask(taskFinishInfo);
         return "redirect:/";
     }
 
