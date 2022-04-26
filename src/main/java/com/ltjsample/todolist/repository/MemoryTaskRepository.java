@@ -19,6 +19,7 @@ public class MemoryTaskRepository implements TaskRepository{
     @Override
     public Task add(Task task) {
         task.setId(++sequence);
+        task.setNo(store.size() + 1);
         store.put(task.getId(), task);
         return task;
     }

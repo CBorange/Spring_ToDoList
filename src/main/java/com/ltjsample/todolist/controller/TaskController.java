@@ -1,6 +1,9 @@
 package com.ltjsample.todolist.controller;
 
 import com.ltjsample.todolist.controller.dto.TaskAddInfo;
+import com.ltjsample.todolist.domain.Task;
+import com.ltjsample.todolist.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,11 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class TaskController {
 
+    private TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService){
+        this.taskService = taskService;
+    }
+
     @PostMapping("/add")
     public String add(@ModelAttribute TaskAddInfo taskAddInfo){
-        // TODO
-        // service에 접근하여 신규 task 등록하는 로직 개발
-        System.out.println(taskAddInfo.getTaskExplain());
+        taskService.addTask(taskAddInfo);
         return "redirect:/";
     }
 

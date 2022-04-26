@@ -37,10 +37,10 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Buy groceries for next week</td>
-                            <td>In progress</td>
+                          <tr th:each="task : ${taskList}">
+                            <th th:text="${task.getNo()}" scope="row"></th>
+                            <td th:text="${task.getExplain()}"></td>
+                            <td th:text="${task.getState()}"></td>
                             <td>
                               <button type="submit" class="btn btn-danger">Delete</button>
                               <button type="submit" class="btn btn-success ms-1">Finished</button>
