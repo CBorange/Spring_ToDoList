@@ -5,6 +5,7 @@
         <!-- <link href="/bin/main/static/css/common_css.css" rel="stylesheet"> -->
     </head>
     <body>
+    <!--Home Main Body-->
         <section class="vh-100" style="background-color: #eee;">
             <div class="container py-5 h-100">
               <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,8 +43,9 @@
                             <td th:text="${task.getExplain()}"></td>
                             <td th:text="${task.getState()}"></td>
                             <td>
-                              <button type="submit" class="btn btn-danger">Delete</button>
-                              <button type="submit" class="btn btn-success ms-1">Finished</button>
+                                <form method="post" th:action="@{/finish}" th:object="${task}">
+                                    <input type="submit" class="btn btn-success ms-1" value="Finished"/>
+                                </form>
                             </td>
                           </tr>
                         </tbody>

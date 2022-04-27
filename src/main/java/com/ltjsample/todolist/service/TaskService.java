@@ -7,7 +7,9 @@ import com.ltjsample.todolist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -33,7 +35,11 @@ public class TaskService {
 
     }
 
-    public void finishTask(TaskFinishInfo finishInfo){
-        taskRepository.findById(finishInfo.getTaskID());
+    public void finishTask(Task finishedTask){
+        Optional<Task> optTask = taskRepository.findById(finishedTask.getId());
+        if(optTask.isPresent()){
+            optTask.get().setState("Finished");
+        }
+        System.out.println("TaskService : finishTask로 전달된 Task DTO가 null 이다.");
     }
 }

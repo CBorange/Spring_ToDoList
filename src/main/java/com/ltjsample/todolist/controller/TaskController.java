@@ -26,8 +26,9 @@ public class TaskController {
     }
 
     @PostMapping("/finish")
-    public String finish(@ModelAttribute TaskFinishInfo taskFinishInfo){
-        taskService.finishTask(taskFinishInfo);
+    public String finish(@ModelAttribute Task taskDTO){
+        System.out.println(taskDTO.getId());
+        taskService.finishTask(taskDTO);
         return "redirect:/";
     }
 
