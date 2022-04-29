@@ -1,13 +1,10 @@
 package com.ltjsample.todolist.service;
 
-import com.ltjsample.todolist.controller.dto.TaskAddInfo;
-import com.ltjsample.todolist.controller.dto.TaskFinishInfo;
 import com.ltjsample.todolist.domain.Task;
 import com.ltjsample.todolist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,15 +21,17 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public void addTask(TaskAddInfo addInfo){
+    public void addTask(Task addTask){
         Task newTask = new Task();
-        newTask.setExplain(addInfo.getTaskExplain());
+        newTask.setExplain(addTask.getExplain());
         newTask.setState("InProgress");
         taskRepository.add(newTask);
     }
 
-    public void deleteTask(){
-
+    public void deleteTask(Task deleteTask){
+        if(deleteTask == null)
+            System.out.println("TaskService : deleteTask로 전달된 Task VO가 null 이다.");
+        taskRepository.delete(deleteTask.getId());
     }
 
     public void finishTask(Task finishedTask){
@@ -40,6 +39,7 @@ public class TaskService {
         if(optTask.isPresent()){
             optTask.get().setState("Finished");
         }
-        System.out.println("TaskService : finishTask로 전달된 Task DTO가 null 이다.");
+        else
+            System.out.println("TaskService : finishTask로 전달된 Task VO가 null 이다.");
     }
 }

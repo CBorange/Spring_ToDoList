@@ -19,7 +19,7 @@
                             action="/add" method="post">
                         <div class="col-8">
                           <div class="form-outline">
-                            <input type="text" id="taskExplain" name="taskExplain" class="form-control" placeholder="Enter a task here"/>
+                            <input type="text" id="explain" name="explain" class="form-control" placeholder="Enter a task here"/>
                           </div>
                         </div>
           
@@ -43,8 +43,10 @@
                             <td th:text="${task.getExplain()}"></td>
                             <td th:text="${task.getState()}"></td>
                             <td>
-                                <form method="post" th:action="@{/finish}" th:object="${task}">
-                                    <input type="submit" class="btn btn-success ms-1" value="Finished"/>
+                                <form method="post" th:object="${task}">
+                                <input type="hidden" name="id" th:value="${task.getId()}">
+                                <input type="submit" class="btn btn-success ms-1" value="Finished" formaction="/finish"/>
+                                <input type="submit" class="btn btn-danger ms-1" value="Delete" formaction="/delete"/>
                                 </form>
                             </td>
                           </tr>

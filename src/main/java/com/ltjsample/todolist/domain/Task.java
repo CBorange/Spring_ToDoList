@@ -1,6 +1,6 @@
 package com.ltjsample.todolist.domain;
 
-// Task 정보 Domain
+// Task 정보 Domain(VO 역할 같이 수행)
 public class Task {
     // Task 고유 ID
     private Long id;

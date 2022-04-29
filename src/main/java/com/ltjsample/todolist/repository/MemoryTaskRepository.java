@@ -26,6 +26,7 @@ public class MemoryTaskRepository implements TaskRepository{
 
     @Override
     public void delete(Long id) {
+        System.out.println("TaskRepository[delete] : " + id);
         store.remove(id);
     }
 

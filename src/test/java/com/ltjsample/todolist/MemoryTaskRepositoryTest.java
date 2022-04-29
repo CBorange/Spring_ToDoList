@@ -7,6 +7,8 @@ import org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class MemoryTaskRepositoryTest {
     MemoryTaskRepository repository = new MemoryTaskRepository();
 
@@ -36,6 +38,22 @@ public class MemoryTaskRepositoryTest {
 
     @Test
     public void delete(){
+        // given
+        for(int i=0; i< 5; ++i)
+        {
+            Task task = new Task();
+            task.setNo(i);
+            task.setExplain(String.format("%s is No of This Task!", task.getNo()));
+            task.setState("InProcess");
 
+            repository.add(task);
+        }
+
+        // when
+        repository.delete(1L);
+        repository.delete(2L);
+        repository.delete(3L);
+        List<Task> storedTask = repository.findAll();
+        Assertions.assertThat(storedTask.size()).isEqualTo(2);
     }
 }
