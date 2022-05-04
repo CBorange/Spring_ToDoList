@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class TaskService {
     private final TaskRepository taskRepository;
 
@@ -21,25 +20,34 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public void addTask(Task addTask){
+    public Long addTask(Task addTask){
         Task newTask = new Task();
         newTask.setExplain(addTask.getExplain());
         newTask.setState("InProgress");
+
         taskRepository.add(newTask);
+        taskRepository.sortRowNumbers();
+
+        return newTask.getId();
     }
 
     public void deleteTask(Task deleteTask){
-        if(deleteTask == null)
+        if(deleteTask == null){
             System.out.println("TaskService : deleteTask로 전달된 Task VO가 null 이다.");
+            return;
+        }
+
         taskRepository.delete(deleteTask.getId());
+        taskRepository.sortRowNumbers();
     }
 
     public void finishTask(Task finishedTask){
-        Optional<Task> optTask = taskRepository.findById(finishedTask.getId());
-        if(optTask.isPresent()){
-            optTask.get().setState("Finished");
+        if(finishedTask == null){
+            System.out.println("TaskService : finishTask 전달된 Task VO가 null 이다.");
+            return;
         }
-        else
-            System.out.println("TaskService : finishTask로 전달된 Task VO가 null 이다.");
+
+        System.out.println(String.format("TaskService : finishTask ID : %d", finishedTask.getId()));
+        taskRepository.setState(finishedTask.getId(), "Finished");
     }
 }

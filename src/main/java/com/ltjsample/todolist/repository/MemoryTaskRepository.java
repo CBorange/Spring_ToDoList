@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
 public class MemoryTaskRepository implements TaskRepository{
 
     private Map<Long, Task> store;
@@ -25,9 +24,18 @@ public class MemoryTaskRepository implements TaskRepository{
     }
 
     @Override
+    public void setState(Long id, String state) {
+    }
+
+    @Override
     public void delete(Long id) {
         System.out.println("TaskRepository[delete] : " + id);
         store.remove(id);
+    }
+
+    @Override
+    public void sortRowNumbers() {
+
     }
 
     @Override

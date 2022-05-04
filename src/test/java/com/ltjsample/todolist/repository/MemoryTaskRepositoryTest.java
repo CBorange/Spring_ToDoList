@@ -1,4 +1,4 @@
-package com.ltjsample.todolist;
+package com.ltjsample.todolist.repository;
 
 import com.ltjsample.todolist.domain.Task;
 import com.ltjsample.todolist.repository.MemoryTaskRepository;
