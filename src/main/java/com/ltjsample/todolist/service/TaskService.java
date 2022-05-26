@@ -26,7 +26,6 @@ public class TaskService {
         newTask.setState("InProgress");
 
         taskRepository.add(newTask);
-        taskRepository.sortRowNumbers();
 
         return newTask.getId();
     }
@@ -38,7 +37,6 @@ public class TaskService {
         }
 
         taskRepository.delete(deleteTask.getId());
-        taskRepository.sortRowNumbers();
     }
 
     public void finishTask(Task finishedTask){

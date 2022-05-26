@@ -2,13 +2,11 @@ package com.ltjsample.todolist.repository;
 
 import com.ltjsample.todolist.domain.Task;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
-import javax.swing.text.html.Option;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +27,6 @@ public class JdbcTemplateTaskRepository implements TaskRepository{
         jdbcInsert.withTableName("task").usingGeneratedKeyColumns("id");
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("no", getLastRowNum() + 1);
         parameters.put("explain", task.getExplain());
         parameters.put("state", task.getState());
 
@@ -56,11 +53,6 @@ public class JdbcTemplateTaskRepository implements TaskRepository{
     }
 
     @Override
-    public void sortRowNumbers() {
-
-    }
-
-    @Override
     public Optional<Task> findById(Long id) {
         List<Task> result = jdbcTemplate.query("select * from task where id = ?", taskRowMapper(), id);
         return result.stream().findAny();
@@ -73,15 +65,14 @@ public class JdbcTemplateTaskRepository implements TaskRepository{
 
     private int getLastRowNum(){
         String sql = "SELECT count(*) FROM task";
-        int rowCount = jdbcTemplate.queryForObject(sql, Integer.class);
-        return rowCount;
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     private RowMapper<Task> taskRowMapper(){
         return (ResultSet rs, int rowNum) -> {
             Task task = new Task();
             task.setId(rs.getLong("id"));
-            task.setNo(rs.getInt("no"));
+            task.setNo(rs.getRow());
             task.setExplain(rs.getString("explain"));
             task.setState(rs.getString("state"));
             return task;

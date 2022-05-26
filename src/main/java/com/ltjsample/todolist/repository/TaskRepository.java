@@ -10,7 +10,6 @@ public interface TaskRepository {
     Task add(Task task);
     void setState(Long id, String state);
     void delete(Long id);
-    void sortRowNumbers();
 
     Optional<Task> findById(Long id);
 

@@ -34,11 +34,6 @@ public class MemoryTaskRepository implements TaskRepository{
     }
 
     @Override
-    public void sortRowNumbers() {
-
-    }
-
-    @Override
     public Optional<Task> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
